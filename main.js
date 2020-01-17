@@ -1,42 +1,3 @@
-class Player {
-  constructor() {
-    this.img = loadImage("assets/player/run.gif");
-    this.velocity = 0;
-    this.gravity = 0.2;
-    this.jumpCount = 0;
-  }
-
-  setup() {
-    this.height = this.img.height;
-    this.width = this.img.width;
-
-    this.x = 50;
-    this.y = height - this.height;
-
-    this.originY = this.y;
-  }
-
-  draw() {
-    this.velocity += this.gravity; // over time, the velocity increases
-    this.y += this.velocity; // if the velocity is a positive number, y will increment (player fall), if the velocity is a negative number, y will decrement (player rise)
-
-    if (this.y >= this.originY) {
-      this.y = this.originY;
-      this.jumpCount = 0;
-    }
-
-    image(this.img, this.x, this.y);
-    // rect(this.x, this.y, this.width, this.height);
-  }
-
-  jump() {
-    if (this.jumpCount < 2) {
-      this.velocity = -6;
-      this.jumpCount += 1;
-    }
-  }
-}
-
 function keyPressed() {
   if (keyCode === 32) {
     game.player.jump();
@@ -46,15 +7,50 @@ function keyPressed() {
 class Game {
   constructor() {
     console.log("GAME CONSTRUCTOR");
+    this.obstacles = [];
+    this.coinFrames = [];
   }
 
   init() {
     this.background = new Background();
     this.player = new Player();
+
+    for (let i = 0; i < 5; i++) {
+      this.coinFrames.push(loadImage("assets/coins/tile00" + i + ".png"));
+    }
+
+    // this.coinFrames = [
+    //   loadImage("assets/coins/tile000.png"),
+    //   loadImage("assets/coins/tile001.png"),
+    //   loadImage("assets/coins/tile002.png"),
+    //   loadImage("assets/coins/tile003.png"),
+    //   loadImage("assets/coins/tile004.png")
+    // ];
   }
 
   draw() {
     this.background.draw();
+
+    // create a new obstacle every 2 seconds
+    if (frameCount % 120 === 0) {
+      this.obstacles.push(new Obstacle());
+    }
+
+    this.obstacles = this.obstacles.filter(
+      function(obstacle) {
+        if (
+          !obstacle.collides(this.player) &&
+          obstacle.x + obstacle.width >= 0
+        ) {
+          return true;
+        }
+      }.bind(this)
+    );
+
+    this.obstacles.forEach(function(obstacle) {
+      obstacle.draw();
+    });
+
     this.player.draw();
   }
 
@@ -79,3 +75,6 @@ function setup() {
 function draw() {
   game.draw();
 }
+
+document.body.style.display = "flex";
+document.body.style.justifyContent = "center";
