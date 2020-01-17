@@ -13,6 +13,8 @@ class Game {
       this.coinFrames.push(loadImage("assets/coins/tile00" + i + ".png"));
     }
 
+    this.coinSound = loadSound("assets/coins/sound.mp3");
+
     // this.coinFrames = [
     //   loadImage("assets/coins/tile000.png"),
     //   loadImage("assets/coins/tile001.png"),

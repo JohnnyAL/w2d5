@@ -38,6 +38,9 @@ class Obstacle {
       return false;
     }
 
+    // collision detected -> we can play the sound
+    game.coinSound.play();
+
     return true;
   }
 }
