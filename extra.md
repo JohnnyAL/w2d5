@@ -6,6 +6,6 @@
 
 ## Event Loop
 
-[Dalina's presentation](https://docs.google.com/presentation/d/1-fLalDFJ2o2VNqDkdeVQVEI5OjosKZ2AW_T_jq26xVs/edit)
-[Loupe](http://latentflip.com/loupe)
+[Dalina's presentation](https://docs.google.com/presentation/d/1-fLalDFJ2o2VNqDkdeVQVEI5OjosKZ2AW_T_jq26xVs/edit)  
+[Loupe](http://latentflip.com/loupe)  
 [What the heck is the event loop?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
